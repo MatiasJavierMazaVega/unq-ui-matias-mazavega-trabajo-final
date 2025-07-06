@@ -1,19 +1,21 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import StartDiffSelectionPage from './pages/StartDiffSelectionPage'
-//import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import StartDiffSelectionPage from './pages/StartDiffSelectionPage';
+import FondoVideo from './components/FondoVideo';
 
 function App() {
-  
-
   return (
-  <BrowserRouter>
-  <Routes>
-    <Route path='/' element={<StartDiffSelectionPage />} />
-  </Routes>
-  </BrowserRouter> 
- 
-  )
+    <>
+      {/* Fondo de video global */}
+      <FondoVideo />
+
+      {/* Contenido de tu app */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<StartDiffSelectionPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
-export default App
+export default App;
