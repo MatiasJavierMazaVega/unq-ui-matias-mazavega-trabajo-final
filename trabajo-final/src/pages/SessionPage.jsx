@@ -15,16 +15,16 @@ const SessionPage = () => {
   const [guesses, setGuesses] = useState([]);
   const [currentGuess, setCurrentGuess] = useState('');
   const [gameOver, setGameOver] = useState(false);
-  const [prompt, setPrompt] = useState(null); // { type: 'win' | 'lose' | 'invalid', message: string }
+  const [prompt, setPrompt] = useState(null); 
+
+  const [isChecking, setIsChecking] = useState(false);
 
 
-  
-  // Función para iniciar o reiniciar la sesión
   const fetchSession = useCallback(async () => {
     try {
       const res = await getDifficultyById(id);
       setSessionId(res.sessionId);
-      setWordLength(res.wordLenght); // Asegurate que sea "wordLength" en el backend
+      setWordLength(res.wordLenght); 
       setGuesses([]);
       setCurrentGuess('');
       setGameOver(false);
@@ -52,9 +52,10 @@ const SessionPage = () => {
 
     if (key === 'enter') {
       if (currentGuess.length !== wordLength) return;
-
+      setIsChecking(true);
       try {
         const feedback = await checkWord(sessionId, currentGuess);
+        setIsChecking(false);
         const newGuesses = [...guesses, { guess: currentGuess, feedback }];
         setGuesses(newGuesses);
         setCurrentGuess('');
@@ -70,6 +71,7 @@ const SessionPage = () => {
         }
 
       } catch (err) {
+        setIsChecking(false);
         if (err.response?.status === 400) {
           setPrompt({ type: 'invalid', message: 'La palabra no existe en el diccionario.' });
         } else if (err.response?.status === 404) {
@@ -110,13 +112,18 @@ const SessionPage = () => {
     );
   };
 
-  const renderEmptyRow = (rowIndex) => (
-    <div className="row" key={rowIndex}>
-      {Array.from({ length: wordLength }).map((_, i) =>
-        renderCell(currentGuess[i] || '', '', i)
-      )}
-    </div>
-  );
+const renderEmptyRow = (rowIndex) => (
+  <div className="row" key={rowIndex}>
+    {Array.from({ length: wordLength }).map((_, i) =>
+      <div
+        className={`cell ${isChecking ? 'loading-cell' : ''}`}
+        key={i}
+      >
+        {currentGuess[i] || ''}
+      </div>
+    )}
+  </div>
+);
 
   const renderBoard = () => {
     const rows = [];
@@ -135,7 +142,7 @@ const SessionPage = () => {
   };
 
   const handleRetry = () => {
-    fetchSession(); // Reinicia la sesión
+    fetchSession(); 
   };
 
   const handleHome = () => navigate('/');
@@ -150,10 +157,10 @@ const SessionPage = () => {
       <h1>Wordle</h1>
 
       <div className="board">
-        {wordLength ? renderBoard() : <p>Cargando sesión...</p>}
+        {wordLength ? renderBoard() : <p className="loading-text">Cargando sesión...</p>}
       </div>
 
-      {/* Botón Rendirse */}
+
       {!gameOver && wordLength > 0 && (
         <div className="surrender-button-container">
           <button className="surrender-button" onClick={handleGiveUp}>
@@ -162,7 +169,7 @@ const SessionPage = () => {
         </div>
       )}
 
-      {/* Prompt modal */}
+
       {prompt && (
         <div className="prompt-overlay">
           <div className="prompt">

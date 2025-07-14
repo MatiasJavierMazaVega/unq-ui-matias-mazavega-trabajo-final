@@ -1,4 +1,3 @@
-// services/checkWordService.js
 import axios from 'axios';
 
 const API_BASE_URL = 'https://word-api-hmlg.vercel.app/api';
@@ -9,7 +8,7 @@ export const checkWord = async (sessionId, word) => {
       sessionId,
       word
     });
-    return response.data; // array con feedback de letras
+    return response.data; 
   } catch (error) {
     throw error;
   }

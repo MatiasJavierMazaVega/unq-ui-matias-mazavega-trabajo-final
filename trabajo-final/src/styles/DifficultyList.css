@@ -36,7 +36,7 @@
 }
 
 .difficulty-list button:nth-child(1) {
-  background-color: #22c55e;  /* verde */
+  background-color: #22c55e;  
 }
 
 .difficulty-list button:nth-child(1):hover {
@@ -44,7 +44,7 @@
 }
 
 .difficulty-list button:nth-child(2) {
-  background-color: #eab308;  /* amarillo */
+  background-color: #eab308;  
 }
 
 .difficulty-list button:nth-child(2):hover {
@@ -52,7 +52,7 @@
 }
 
 .difficulty-list button:nth-child(3) {
-  background-color: #f97316;  /* naranja */
+  background-color: #f97316;  
 }
 
 .difficulty-list button:nth-child(3):hover {
@@ -60,7 +60,7 @@
 }
 
 .difficulty-list button:nth-child(4) {
-  background-color: #ef4444;  /* rojo */
+  background-color: #ef4444;  
 }
 
 .difficulty-list button:nth-child(4):hover {
