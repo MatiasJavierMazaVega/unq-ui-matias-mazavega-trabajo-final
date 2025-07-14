@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 a {
@@ -28,7 +30,7 @@ body {
   min-height: 100vh;
   height: 100%;
   font-family: inherit;
-  background-color: inherit; /* Hereda el fondo definido en :root */
+  background-color: inherit; 
 }
 
 h1 {

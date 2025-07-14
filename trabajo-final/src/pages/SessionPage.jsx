@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getDifficultyById } from '../services/getDifficultyByIdService';
 import { checkWord } from '../services/checkWordService';
 import '../styles/SessionPage.css';
@@ -8,26 +8,43 @@ const MAX_ATTEMPTS = 6;
 
 const SessionPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [sessionId, setSessionId] = useState(null);
   const [wordLength, setWordLength] = useState(0);
   const [guesses, setGuesses] = useState([]);
   const [currentGuess, setCurrentGuess] = useState('');
   const [gameOver, setGameOver] = useState(false);
-  const [message, setMessage] = useState('');
+  const [prompt, setPrompt] = useState(null); // { type: 'win' | 'lose' | 'invalid', message: string }
+
+
+  
+  // Función para iniciar o reiniciar la sesión
+  const fetchSession = useCallback(async () => {
+    try {
+      const res = await getDifficultyById(id);
+      setSessionId(res.sessionId);
+      setWordLength(res.wordLenght); // Asegurate que sea "wordLength" en el backend
+      setGuesses([]);
+      setCurrentGuess('');
+      setGameOver(false);
+      setPrompt(null);
+    } catch (err) {
+      console.error('Error fetching session:', err);
+    }
+  }, [id]);
 
   useEffect(() => {
-    const fetchSession = async () => {
-      try {
-        const res = await getDifficultyById(id);
-        setSessionId(res.sessionId);
-        setWordLength(res.wordLenght); 
-      } catch (err) {
-        console.error('Error fetching session:', err);
-      }
-    };
-
     if (id) fetchSession();
-  }, [id]);
+  }, [id, fetchSession]);
+
+
+  useEffect(() => {
+    if (prompt?.type === 'invalid') {
+      const timeout = setTimeout(() => setPrompt(null), 1500); 
+      return () => clearTimeout(timeout);
+    }
+  }, [prompt]);
 
   const handleKeyDown = useCallback(async (e) => {
     if (gameOver || !wordLength) return;
@@ -41,23 +58,26 @@ const SessionPage = () => {
         const newGuesses = [...guesses, { guess: currentGuess, feedback }];
         setGuesses(newGuesses);
         setCurrentGuess('');
+        setPrompt(null);
 
         const isWin = feedback.every((l) => l.solution === 'correct');
         if (isWin) {
           setGameOver(true);
-          setMessage('¡Ganaste!');
+          setPrompt({ type: 'win', message: '¡Ganaste!' });
         } else if (newGuesses.length === MAX_ATTEMPTS) {
           setGameOver(true);
-          setMessage('¡Perdiste!');
+          setPrompt({ type: 'lose', message: '¡Perdiste!' });
         }
 
       } catch (err) {
         if (err.response?.status === 400) {
-          setMessage('La palabra no existe en el diccionario.');
+          setPrompt({ type: 'invalid', message: 'La palabra no existe en el diccionario.' });
         } else if (err.response?.status === 404) {
-          setMessage('Sesión no encontrada.');
+          setGameOver(true);
+          setPrompt({ type: 'lose', message: 'Sesión no encontrada.' });
         } else {
-          setMessage('Error desconocido al verificar palabra.');
+          setGameOver(true);
+          setPrompt({ type: 'lose', message: 'Error desconocido al verificar palabra.' });
         }
       }
 
@@ -114,16 +134,57 @@ const SessionPage = () => {
     return rows;
   };
 
+  const handleRetry = () => {
+    fetchSession(); // Reinicia la sesión
+  };
+
+  const handleHome = () => navigate('/');
+
+  const handleGiveUp = () => {
+    setGameOver(true);
+    setPrompt({ type: 'lose', message: 'Te rendiste. ¡Suerte la próxima!' });
+  };
+
   return (
     <div className="game-container">
-      <h1>Wordle</h1>xasa
+      <h1>Wordle</h1>
+
       <div className="board">
         {wordLength ? renderBoard() : <p>Cargando sesión...</p>}
       </div>
-      {message && <p className="message">{message}</p>}
+
+      {/* Botón Rendirse */}
+      {!gameOver && wordLength > 0 && (
+        <div className="surrender-button-container">
+          <button className="surrender-button" onClick={handleGiveUp}>
+            Rendirse
+          </button>
+        </div>
+      )}
+
+      {/* Prompt modal */}
+      {prompt && (
+        <div className="prompt-overlay">
+          <div className="prompt">
+            <p>{prompt.message}</p>
+
+            {(prompt.type === 'win' || prompt.type === 'lose') && (
+              <div className="prompt-buttons">
+                <button onClick={handleRetry}>Volver a jugar</button>
+                <button onClick={handleHome}>Volver al inicio</button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default SessionPage;
+
+
+
+
+
 
