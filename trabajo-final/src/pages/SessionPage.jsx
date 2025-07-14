@@ -25,7 +25,7 @@ const SessionPage = () => {
     try {
       const res = await getDifficultyById(id);
       setSessionId(res.sessionId);
-      setWordLength(res.wordLenght); // cuidado con el typo si es wordLength en backend
+      setWordLength(res.wordLenght); 
       setGuesses([]);
       setCurrentGuess('');
       setGameOver(false);
