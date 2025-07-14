@@ -1,13 +1,17 @@
 .game-container {
-  text-align: center;
-  margin-top: 50px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     
+  align-items: center;         
+  text-align: center;          
 }
 
 .game-container h1 {
   font-size: 5rem;
   font-weight: bold;
   color: #2c3e50;
-  margin-top: 3rem;
+  margin-top: 0rem;
   margin-bottom: 1rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   letter-spacing: 2px;
