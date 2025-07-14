@@ -1,7 +1,8 @@
 # unq-ui-matias-mazavega-trabajo-final
 
 ## Instalación:
-Asegurarse de estar posicionado en el release correspondiente. En el desplegable de "Switch branches/tags" debe estar seleccionado el tag "entrega-trabajo-final-mazavega".
+Asegurarse de estar posicionado en el release correspondiente. <br>
+En el desplegable de "Switch branches/tags" debe estar seleccionado el tag "entrega-trabajo-final-mazavega".
 
 ### Opcion 1
 Descargar el archivo .zip desde el botón/desplegable "<> Code" <br>
