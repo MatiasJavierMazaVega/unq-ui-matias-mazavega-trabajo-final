@@ -10,7 +10,7 @@ Una vez descargado, descomprimir el archivo en donde considere mas conveniente.
 
 ### Opcion 2
 Abrir la consola de git bash o similares en la ubicacion deseada <br>
-Clonar el repositorio ejecutando el comando git clone usando la URL que figura en el mismo desplegable en la pestaña HTTTPS.
+Clonar el repositorio ejecutando el comando git clone usando la URL que figura en el mismo desplegable en la pestaña HTTTPS. <br>
 
 Abrir la carpeta del proyecto en Visual Studio Code (u otro editor de codigo). <br>
 Desde la terminal moverse a la carpeta trabajo-final ( cd trabajo-final ) <br>
