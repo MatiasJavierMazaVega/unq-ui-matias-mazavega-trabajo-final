@@ -5,28 +5,36 @@
 
   color-scheme: light dark;
   color: #213547;
-   
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
 
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
+  min-width: 320px; 
   min-height: 100vh;
-  height: 100%;
   font-family: inherit;
-  background-color: inherit; 
+  background-color: inherit;
+
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
 button {
@@ -39,15 +47,16 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  max-width: 100%;
+  box-sizing: border-box;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-html, body, #root {
-  height: 100%;
-}

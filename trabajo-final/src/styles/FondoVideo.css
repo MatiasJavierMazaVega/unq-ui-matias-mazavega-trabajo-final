@@ -6,6 +6,8 @@
   height: 100vh;
   object-fit: cover;
   z-index: -2;
+  pointer-events: none;
+  user-select: none;
 }
 
 .video-overlay {
@@ -17,4 +19,5 @@
   background: linear-gradient(to top, rgba(240, 240, 240, 0.95), transparent);
   z-index: -1;
   pointer-events: none;
+  max-height: 200px;
 }

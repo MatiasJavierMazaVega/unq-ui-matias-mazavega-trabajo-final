@@ -3,12 +3,21 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .card {
   padding: 2em;
+  box-sizing: border-box;
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
 .read-the-docs {
   color: #888;
+  max-width: 100%;
+  font-size: 0.9em;
+  word-wrap: break-word;
 }
+

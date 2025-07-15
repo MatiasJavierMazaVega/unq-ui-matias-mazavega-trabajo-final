@@ -3,11 +3,15 @@
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0rem;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .difficulty-list button {
   width: 100%;
+  max-width: 300px;      
   min-width: 200px;
   padding: 0.5em 3.5em;
   font-size: 1.8rem;
@@ -15,23 +19,25 @@
   border: none;
   border-radius: 14px;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   color: white;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
 
-  display: flex;           
-  justify-content: center; 
-  align-items: center;     
-  text-align: center;      
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  box-sizing: border-box;
 }
 
 .difficulty-list button:hover {
-  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
 .difficulty-list button:nth-child(1) {
-  background-color: #22c55e;  
+  background-color: #22c55e;
 }
 
 .difficulty-list button:nth-child(1):hover {
@@ -39,7 +45,7 @@
 }
 
 .difficulty-list button:nth-child(2) {
-  background-color: #eab308;  
+  background-color: #eab308;
 }
 
 .difficulty-list button:nth-child(2):hover {
@@ -47,7 +53,7 @@
 }
 
 .difficulty-list button:nth-child(3) {
-  background-color: #f97316;  
+  background-color: #f97316;
 }
 
 .difficulty-list button:nth-child(3):hover {
@@ -55,7 +61,7 @@
 }
 
 .difficulty-list button:nth-child(4) {
-  background-color: #ef4444;  
+  background-color: #ef4444;
 }
 
 .difficulty-list button:nth-child(4):hover {

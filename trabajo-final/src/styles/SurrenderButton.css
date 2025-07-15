@@ -1,6 +1,9 @@
 .surrender-button-container {
   margin-top: 20px;
   text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 1rem;
 }
 
 .surrender-button {
@@ -13,8 +16,14 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  max-width: 100%;
+  width: auto;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 
 .surrender-button:hover {
   background-color: #d32f2f;
 }
+

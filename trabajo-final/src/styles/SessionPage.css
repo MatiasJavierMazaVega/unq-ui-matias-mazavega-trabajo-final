@@ -2,9 +2,13 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;     
-  align-items: center;         
-  text-align: center;          
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .game-container h1 {
@@ -16,13 +20,19 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   letter-spacing: 2px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  word-wrap: break-word;
+  line-height: 1.1;
 }
 
 .loading-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh; 
+  height: 50vh;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .loading-text {
@@ -33,24 +43,30 @@
   letter-spacing: 1px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
   text-align: center;
+  max-width: 100%;
+  word-wrap: break-word;
+  line-height: 1.2;
 }
 
 .floating-hint {
-  position: fixed; 
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
-  z-index: 9999; 
-  background-color: aliceblue; 
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: aliceblue;
   padding: 10px 20px;
   border-radius: 8px;
   font-size: 14px;
   color: #000000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   animation: pulseHint 2s ease-in-out infinite;
-  pointer-events: none; 
+  pointer-events: none;
+  max-width: 90%;
+  box-sizing: border-box;
+  text-align: center;
+  word-wrap: break-word;
 }
-
 
 @keyframes pulseHint {
   0%, 100% {
@@ -60,4 +76,5 @@
     opacity: 1;
   }
 }
+
 
