@@ -21,19 +21,26 @@ const SessionPage = () => {
   const [prompt, setPrompt] = useState(null);
   const [isChecking, setIsChecking] = useState(false);
 
-  const fetchSession = useCallback(async () => {
-    try {
-      const res = await getDifficultyById(id);
-      setSessionId(res.sessionId);
-      setWordLength(res.wordLenght); 
-      setGuesses([]);
-      setCurrentGuess('');
-      setGameOver(false);
-      setPrompt(null);
-    } catch (err) {
-      console.error('Error fetching session:', err);
+const fetchSession = useCallback(async () => {
+  try {
+    const res = await getDifficultyById(id);
+    setSessionId(res.sessionId);
+    setWordLength(res.wordLenght); 
+    setGuesses([]);
+    setCurrentGuess('');
+    setGameOver(false);
+    setPrompt(null);
+  } catch (err) {
+    console.error('Error fetching session:', err);
+    if (err.response?.status === 404) {
+      setGameOver(true);
+      setPrompt({ type: 'lose', message: 'La sesión no existe o ha expirado.' });
+    } else {
+      setGameOver(true);
+      setPrompt({ type: 'lose', message: 'Error al cargar la sesión.' });
     }
-  }, [id]);
+  }
+}, [id]);
 
   useEffect(() => {
     if (id) fetchSession();
