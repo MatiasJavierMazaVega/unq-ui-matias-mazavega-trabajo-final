@@ -23,16 +23,21 @@ const GameBoard = ({ wordLength, guesses, currentGuess, isChecking }) => {
 
   const renderEmptyRow = (rowIndex) => (
     <div className="row" key={rowIndex}>
-      {Array.from({ length: wordLength }).map((_, i) => (
-        <div
-          className={`cell ${isChecking ? 'loading-cell' : ''}`}
-          key={i}
-        >
-          {currentGuess[i] || ''}
-        </div>
-      ))}
+      {Array.from({ length: wordLength }).map((_, i) => {
+        const isCurrent = i === currentGuess.length && !isChecking;
+
+        return (
+          <div
+            className={`cell ${isChecking ? 'loading-cell' : ''} ${isCurrent ? 'current-cell' : ''}`}
+            key={i}
+          >
+            {currentGuess[i] || ''}
+          </div>
+        );
+      })}
     </div>
   );
+
 
   const rows = [];
 

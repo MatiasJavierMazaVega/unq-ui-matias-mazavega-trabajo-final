@@ -75,7 +75,8 @@ const SessionPage = () => {
 
       } catch (err) {
         setIsChecking(false);
-        if (err.response?.status === 400) {
+          if (err.response?.status === 400) {
+          setCurrentGuess(''); 
           setPrompt({ type: 'invalid', message: 'La palabra no existe en el diccionario.' });
         } else if (err.response?.status === 404) {
           setGameOver(true);
@@ -88,7 +89,7 @@ const SessionPage = () => {
 
     } else if (key === 'backspace') {
       setCurrentGuess((prev) => prev.slice(0, -1));
-    } else if (/^[a-z]$/.test(key) && currentGuess.length < wordLength) {
+    } else if (/^[a-zñ]$/.test(key) && currentGuess.length < wordLength) {
       setCurrentGuess((prev) => prev + key);
     }
   }, [currentGuess, sessionId, wordLength, guesses, gameOver]);
@@ -108,7 +109,6 @@ const SessionPage = () => {
   return (
     <div className="game-container">
       <h1>Wordle</h1>
-
       {wordLength ? (
         <GameBoard
           wordLength={wordLength}
@@ -120,6 +120,11 @@ const SessionPage = () => {
           <div className="loading-container">
             <p className="loading-text">Cargando sesión...</p>
           </div>
+      )}
+     {!gameOver && wordLength > 0 && guesses.length === 0 && currentGuess.length === wordLength && (
+      <div className="floating-hint">
+        Presiona <strong>Enter</strong> para enviar tu palabra
+      </div>
       )}
 
       {!gameOver && wordLength > 0 && (

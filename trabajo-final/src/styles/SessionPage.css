@@ -35,3 +35,29 @@
   text-align: center;
 }
 
+.floating-hint {
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  z-index: 9999; 
+  background-color: aliceblue; 
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #000000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  animation: pulseHint 2s ease-in-out infinite;
+  pointer-events: none; 
+}
+
+
+@keyframes pulseHint {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
